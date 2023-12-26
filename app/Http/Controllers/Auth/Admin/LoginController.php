@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\AuthRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,12 +23,8 @@ class LoginController extends Controller
         return view ('auth.admin.adminLoginForm');
     }
     public function checkAdmin(request $request){  
-        // dd($request) ;     
-        $request->validate([
-            'email'=>'required | string',
-            'password'=>'required | string ',
-        ]);
-        
+     
+        $request->merge(['password' => $request->Adminpassword]);
         if(Auth::guard('admin')->attempt($request->only('email','password'),$request->remember)){
             return redirect()->to($this->redirectTo);
         }

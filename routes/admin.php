@@ -16,16 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-route::get('home', function () {
-    return view('home');
-})->name('homeNew')->middleware('adminAuth:admin');
 
 route::get('dashboard', 'admin\adminController@dashboard')->name('dashboard');
 // start admin Login Routes 
 route::prefix('admin')->group(function () {
     route::namespace('Auth\Admin')->group(function () {
         route::controller('LoginController')->group(function () {
-                route::get('login', 'loginForm')->name('LoginForm');
+                route::get('login', 'loginForm')->name('loginForm');
                 route::post('login', 'checkAdmin')->name('loginCheck');
                 // route::post('logout','Logout')->name('AdminLogout');
             

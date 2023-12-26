@@ -1,13 +1,12 @@
 @extends('layouts.admin.loginLayout')
-@section('tittle','Admin Login')
+@section('tittle', 'Admin Login')
 @section('content')
-    
+
     <div class="limiter">
-        <div class="container-login100"
-            style="background-image: url('{{ asset('admin/adminLogin/images/bg-01.jpg') }}');">
+        <div class="container-login100" style="background-image: url('{{ asset('admin/adminLogin/images/bg-01.jpg') }}');">
             <div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
-                <form class="login100-form validate-form flex-sb flex-w" method="post"
-                    action="{{ route('loginCheck') }}"> @csrf
+                <form class="login100-form validate-form flex-sb flex-w" method="post" action="{{ route('loginCheck') }}">
+                    @csrf
                     <span class="login100-form-title p-b-53">
                         Sign In With
                     </span>
@@ -27,8 +26,8 @@
                             Email
                         </span>
                     </div>
-                    <div class="wrap-input100 validate-input" data-validate = "email is required">
-                        <input class="input100 @error('email') is-invalid @enderror " type="text" name="email">
+                    <div class="wrap-input100 ">
+                        <input class="form-control @error('email') is-invalid @enderror" type="text" name="email">
                         <span class="focus-input100"></span>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -45,16 +44,17 @@
                         <a href="#" class="txt2 bo1 m-l-5">
                             Forgot?
                         </a>
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                {{ $message }}
-                            </span>
-                        @enderror
                     </div>
-                    <div class="wrap-input100 validate-input" data-validate = "Password is required">
-                        <input class="input100 
-                        @error('password') is-invalid @enderror " type="password" name="password">
+                    <div class="wrap-input100 ">
+                        <input class="form-control 
+                        @error('Adminpassword') is-invalid @enderror "
+                            type="password" name="Adminpassword">
                         <span class="focus-input100"></span>
+                            @error('Adminpassword')
+                                <span class="invalid-feedback" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
                     </div>
 
                     <div class="container-login100-form-btn m-t-17">
@@ -63,11 +63,11 @@
                         </button>
                     </div>
                     @if (Session::has('error'))
-                    <div class="alert alert-danger">
-                        <span>
-                            {{ Session::get('error') }}
-                        </span>
-                    </div>
+                        <div class="alert alert-danger">
+                            <span>
+                                {{ Session::get('error') }}
+                            </span>
+                        </div>
                     @endif
 
                     <div class="w-full text-center p-t-55">
@@ -84,4 +84,4 @@
         </div>
     </div>
 
-    @endsection
+@endsection

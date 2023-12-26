@@ -1,4 +1,5 @@
 @extends('layouts.admin.loginLayout')
+@section('tittle','Admin Login')
 @section('content')
     
     <div class="limiter">
@@ -74,7 +75,7 @@
                             Not a member?
                         </span>
 
-                        <a href="#" class="txt2 bo1">
+                        <a href="{{ route('registerForm') }}" class="txt2 bo1">
                             Sign up now
                         </a>
                     </div>

@@ -23,7 +23,7 @@ class adminController extends Controller
         return view ('admin');
     }
     public function loginForm(){
-        return view ('test.adminLoginForm');
+        return view ('auth.admin.adminLoginForm');
     }
     public function checkAdmin(request $request){  
         // dd($request) ;     
@@ -40,7 +40,7 @@ class adminController extends Controller
     }
 
     public function registerForm(){
-        return view ('test.adminRegisterForm');
+        return view ('auth.admin.adminRegisterForm');
     }
     public function storeAdmin(request $request){
         // dd($request);

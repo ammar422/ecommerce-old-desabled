@@ -1,7 +1,6 @@
 @extends('layouts.admin.admin')
+@section('tittle','Admin dashboard')
 @section('content')
-
-
         <!-- Sale & Revenue Start -->
         <div class="container-fluid pt-4 px-4">
             <div class="row g-4">
@@ -156,7 +155,7 @@
                             <a href="">Show All</a>
                         </div>
                         <div class="d-flex align-items-center border-bottom py-3">
-                            <img class="rounded-circle flex-shrink-0" src="assets/admin/img/user.jpg" alt=""
+                            <img class="rounded-circle flex-shrink-0" src="{{ asset('assets/admin/img/user.jpg') }}" alt=""
                                  style="width: 40px; height: 40px;">
                             <div class="w-100 ms-3">
                                 <div class="d-flex w-100 justify-content-between">
@@ -167,7 +166,7 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center border-bottom py-3">
-                            <img class="rounded-circle flex-shrink-0" src="assets/admin/img/user.jpg" alt=""
+                            <img class="rounded-circle flex-shrink-0" src="{{ asset('assets/admin/img/user.jpg') }}" alt=""
                                  style="width: 40px; height: 40px;">
                             <div class="w-100 ms-3">
                                 <div class="d-flex w-100 justify-content-between">
@@ -178,7 +177,7 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center border-bottom py-3">
-                            <img class="rounded-circle flex-shrink-0" src="assets/admin/img/user.jpg" alt=""
+                            <img class="rounded-circle flex-shrink-0" src="{{ asset('assets/admin/img/user.jpg') }}" alt=""
                                  style="width: 40px; height: 40px;">
                             <div class="w-100 ms-3">
                                 <div class="d-flex w-100 justify-content-between">
@@ -189,7 +188,7 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center pt-3">
-                            <img class="rounded-circle flex-shrink-0" src="assets/admin/img/user.jpg" alt=""
+                            <img class="rounded-circle flex-shrink-0" src="{{ asset('assets/admin/img/user.jpg') }}" alt=""
                                  style="width: 40px; height: 40px;">
                             <div class="w-100 ms-3">
                                 <div class="d-flex w-100 justify-content-between">

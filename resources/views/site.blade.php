@@ -1,4 +1,5 @@
 @extends('layouts.front.site')
+@section('tittle','Fruitkha')
 @section('content')
 	<!-- features list section -->
 	<div class="list-section pt-80 pb-80">

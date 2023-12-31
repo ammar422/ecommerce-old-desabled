@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\adminController;
 use App\Http\Controllers\Auth\LoginController;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,29 +18,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-route::get('dashboard', 'admin\adminController@dashboard')->name('dashboard');
-// start admin Login Routes 
-route::prefix('admin')->group(function () {
-    route::namespace('Auth\Admin')->group(function () {
-        route::controller('LoginController')->group(function () {
-                route::get('login', 'loginForm')->name('loginForm');
-                route::post('login', 'checkAdmin')->name('loginCheck');
-                // route::post('logout','Logout')->name('AdminLogout');
-            
+route::group(['prefix' => 'admin'], function () {
+    route::group(['middleware' => 'auth:admin'], function () {
+        route::namespace('Auth\Admin')->group(function () {
+            route::get('dashboard', 'LoginController@dashboard')->name('dashboard');
+            route::post('logout', 'LoginController@logout')->name('adminLogout');
+        });
+
+        // begin languages routes 
+        route::group(['prefix' => 'languages', 'namespace'=>'Admin'], function () {
+            route::get('ShowAllLangs','LanguagesController@ShowAllLangs')->name('ShowAllLangs');
+            route::get('addAllLangs','LanguagesController@addAllLangs')->name('addAllLangs');
+            route::post('addAllLangs','LanguagesController@stroeLanguage')->name('stroeLanguage');
+
+        });
+        // begin languages routes 
+
+    });
+
+    route::group(['middleware' => 'guest:admin'], function () {
+        route::namespace('Auth\Admin')->group(function () {
+            route::get('login', 'LoginController@loginForm')->name('loginForm');
+            route::post('login', 'LoginController@checkAdmin')->name('loginCheck');
         });
     });
 });
-// end Admin login routes
-
-// start admin register Routes 
-
-route::prefix('admin')->group(function () {
-    route::namespace('Auth\Admin')->group(function () {
-        route::controller('registerController')->group(function () {
-            route::get('register', 'registerForm')->name('registerForm');
-            route::post('register', 'storeAdmin')->name('storeAdmin');
-        });
-    });
-});
-
-// end admin register Routes

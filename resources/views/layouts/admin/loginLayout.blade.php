@@ -2,65 +2,51 @@
 <html lang="en">
 
 <head>
-    <title>@yield('tittle')</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="{{ asset('admin/adminLogin/images/icons/favicon.ico') }}" />
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/adminLogin/vendor/bootstrap/css/bootstrap.min.css') }}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('admin/adminLogin/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('admin/adminLogin/fonts/Linearicons-Free-v1.0.0/icon-font.min.css') }}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/adminLogin/vendor/animate/animate.css') }}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('admin/adminLogin/vendor/css-hamburgers/hamburgers.min.css') }}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('admin/adminLogin/vendor/animsition/css/animsition.min.cs') }}s">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/adminLogin/vendor/select2/select2.min.css') }}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('admin/adminLogin/vendor/daterangepicker/daterangepicker.css') }}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/adminLogin/css/util.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/adminLogin/css/main.css') }}">
-    <!--===============================================================================================-->
+    <meta charset="utf-8">
+    <title>DarkPan - Bootstrap 5 Admin Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{{ asset('admin/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
-   
-   
-   
-    @yield('content')
-    
+@yield('content')
 
-   
-    <div id="dropDownSelect1"></div>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('admin/lib/chart/chart.min.js') }}"></script>
+    <script src="{{ asset('admin/lib/easing/easing.min.js') }}"></script>
+    <script src="{{ asset('admin/lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ asset('admin/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('admin/lib/tempusdominus/js/moment.min.js') }}"></script>
+    <script src="{{ asset('admin/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+    <script src="{{ asset('admin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 
-    <!--===============================================================================================-->
-    <script src="{{ asset('admin/adminLogin/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-    <!--===============================================================================================-->
-    <script src="{{ asset('admin/adminLogin/vendor/animsition/js/animsition.min.js') }}"></script>
-    <!--===============================================================================================-->
-    <script src="{{ asset('admin/adminLogin/vendor/bootstrap/js/popper.js') }}"></script>
-    <script src="{{ asset('admin/adminLogin/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-    <!--===============================================================================================-->
-    <script src="{{ asset('admin/adminLogin/vendor/select2/select2.min.js') }}"></script>
-    <!--===============================================================================================-->
-    <script src="{{ asset('admin/adminLogin/vendor/daterangepicker/moment.min.js') }}"></script>
-    <script src="{{ asset('admin/adminLogin/vendor/daterangepicker/daterangepicker.js') }}"></script>
-    <!--===============================================================================================-->
-    <script src="{{ asset('admin/adminLogin/vendor/countdowntime/countdowntime.js') }}"></script>
-    <!--===============================================================================================-->
-    <script src="{{ asset('admin/adminLogin/js/main.js') }}"></script>
-
+    <!-- Template Javascript -->
+    <script src="{{ asset('admin/js/main.js') }}"></script>
 </body>
 
 </html>

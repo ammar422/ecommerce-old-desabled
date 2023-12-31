@@ -12,35 +12,36 @@ class LoginController extends Controller
 {
     protected $redirectTo = RouteServiceProvider::ADMIN_HOME;
 
-   public function __construct()
-{
+    public function __construct()
+    {
 
-    $this->middleware('guest:admin')->only(['loginForm','registerForm']);
-}
-    
-   
-    public function loginForm(){
-        return view ('auth.admin.adminLoginForm');
+        // $this->middleware('guest:admin')->only(['loginForm','registerForm']);
     }
-    public function checkAdmin(request $request){  
-     
+    public function dashboard()
+    {
+        return view('admin.admin');
+    }
+
+
+    public function loginForm()
+    {
+        return view('auth.admin.adminLoginForm');
+    }
+    public function checkAdmin(AuthRequest $request)
+    {
+        
         $request->merge(['password' => $request->Adminpassword]);
-        if(Auth::guard('admin')->attempt($request->only('email','password'),$request->remember)){
+        if (Auth::guard('admin')->attempt($request->only('email', 'password'), $request->remember)) {
             return redirect()->to($this->redirectTo);
-        }
-        else
-        return redirect()->back()->withInput(['email'=>$request->email])->with(['error'=>'somthing went wrong']);
+        } else
+            return redirect()->back()->withInput(['email' => $request->email])->with(['error' => 'somthing went wrong']);
     }
 
     public function Logout(Request $request)
     {
-
         Auth::guard('admin')->logout();
         // $request->session()->invalidate();
         // $request->session()->regenerateToken();
         return redirect()->route('loginForm');
-       
     }
-    
-
 }

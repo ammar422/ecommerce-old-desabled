@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Lang;
 
 class Language extends Model
 {
@@ -23,5 +24,10 @@ class Language extends Model
     public function scopeActive($query){
         return $query->where('active',1);
     }
-    
+    public function getActiveAttribute($val){
+         return $val== 1 ? 'active':'not active';
+    }
+   public function getDirectionAttribute($val){
+    return $val =='ltr'?'Lift To right':'Right To Lift';
+   }
 }

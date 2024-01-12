@@ -43,8 +43,8 @@
                     </span>
                 </a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a href="button.html" class="dropdown-item">Show All Categories</a>
-                    <a href="typography.html" class="dropdown-item">Add New Category</a>
+                    <a href="{{ route('ShowAllCategories') }}" class="dropdown-item">Show All Categories</a>
+                    <a href="{{ route('addNewCategories') }}" class="dropdown-item">Add New Category</a>
                 </div>
             </div>
 

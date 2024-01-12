@@ -3,8 +3,9 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Symfony\Contracts\Service\Attribute\Required;
 
-class LangRequest extends FormRequest
+class MainCategoriesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,15 +23,13 @@ class LangRequest extends FormRequest
     public function rules(): array
     {
         return [
-
-            'name' => ['required', 'string'],
-            'abbr' => ['required', 'string'],
-            'local'=> ['required', 'string'],
-            'direction'=>['required'],
-            'active'=>['required'],
-
-
-
+            'photo'=>'required|mimes:jpg,jpeg,png',
+            'category'=>'array|min:1',
+            'category.*.name'=>'required',
+            'category.*.abbr'=>'required',
+            // 'name'=>'required',
+            // 'abbr'=>'required',
+            // 'active'=>'required',
         ];
     }
 }

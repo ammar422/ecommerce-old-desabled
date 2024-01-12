@@ -13,9 +13,9 @@ class LanguagesController extends Controller
     {
         try {
             $langs = Language::select()->paginate(PAGINATION_COUNT);
-            return view('admin.allLanguages', compact('langs'));
+            return view('admin.languages.allLanguages', compact('langs'));
         } catch (\Exception $ex) {
-            return  'page not found sorrey';
+            return $ex->getMessage();
         }
 
 
@@ -24,9 +24,9 @@ class LanguagesController extends Controller
     public function addNewLangs()
     {
         try {
-            return view('admin.addLanguage');
+            return view('admin.languages.addLanguage');
         } catch (\Exception $ex) {
-            return  'page not found sorrey';
+            return $ex->getMessage();
         }
     }
 
@@ -36,7 +36,7 @@ class LanguagesController extends Controller
             Language::create($request->validated());
             return redirect()->route('addNewLangs')->with(['success' => 'The New Language Add Successfuly']);
         } catch (\Exception $ex) {
-            return  'page not found sorrey';
+            return $ex->getMessage();
         }
     }
 
@@ -53,7 +53,7 @@ class LanguagesController extends Controller
                     ->with(['success' => 'The Language deleted succefuly']);
             }
         } catch (\Exception $ex) {
-            return  'page not found sorrey';
+            return $ex->getMessage();
         }
     }
 
@@ -65,23 +65,23 @@ class LanguagesController extends Controller
                 return redirect()->route('ShowAllLangs')->with(['error' => 'This Language Is Not Found']);
             } else {
                 $language = Language::select()->find($lagn_id);
-                return view('admin.editLanguage', compact('language'));
+                return view('admin.languages.editLanguage', compact('language'));
             }
         } catch (\Exception $ex) {
-            return  'page not found sorrey';
+            return $ex->getMessage();
         }
     }
-    public function updateLanguage(LangRequest $request)
+    public function updateLanguage(LangRequest $request,$id)
     {
         try {
-            $language = Language::find($request->id);
+            $language = Language::find($id);
             if (!$language) {
                 return redirect()->route('ShowAllLangs')->with(['error' => 'This Language Is Not Found']);
             } else
                 $language->update($request->all());
             return redirect()->route('ShowAllLangs')->with(['success' => 'This Language Is edited successfuly']);
         } catch (\Exception $ex) {
-            return  'page not found sorrey';
+            return $ex->getMessage();
         }
     }
 }

@@ -42,10 +42,10 @@
 
                                 </div>
 
-                                <div class="mb-3">
+                                <div class="mb-3" hidden >
                                     <label class="form-label">{{ $lang->name }} Abbreviation</label>
-                                    <input type="text" name="category[{{ $index }}][abbr]"
-                                    value=""
+                                    <input  type="text" name="category[{{ $index }}][abbr]"
+                                    value="{{ $lang->abbr }}"
                                         class="form-control @error("category.$index.abbr") is-invalid @enderror">
                                     @error("category.$index.abbr")
                                         <span class="invalid-feedback" role="alert">

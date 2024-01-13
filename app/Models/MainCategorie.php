@@ -25,7 +25,7 @@ class MainCategorie extends Model
     }
     public function scopeSelection($query)
     {
-        return $query->select('id', 'name', 'translation_lang', 'slug', 'photo', 'active');
+        return $query->select('id', 'name', 'translation_lang', 'slug', 'photo', 'active')->get();
     }
 
     protected function photo():Attribute

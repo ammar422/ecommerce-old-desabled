@@ -1,24 +1,53 @@
 @extends('layouts.admin.admin')
-@section('tittle','Edit Main Category')
+@section('tittle', 'Edit Main Category')
 @section('content')
     @include('includes.sidebars.adminSidebar')
     @include('includes.navbars.adminNavbar')
     <!-- Form Start -->
+    {{ $category }}
     <div class="container-fluid pt-5 px-5">
         <div class="row g-4">
             <div class="col-sm-20 col-xl-50">
                 <div class="bg-secondary rounded h-100 p-4">
-                    <h6 class="mb-4">Edit New Category</h6>
+                    <h6 class="mb-4">Edit Main Category ({{ $category->name }})</h6>
                     @include('includes.alerts.success')
-                    <form method="post" action="{{ route('updateLanguage',$language->id) }}">
+                    @include('includes.alerts.errors')
+                    <form method="post" action="{{ route('updateCategories',$category->id) }}" enctype="multipart/form-data">
                         @csrf
-                       
-                        <div class="">
-                            <label class="form-label">Language Nmae</label>
-                            <input type="text" name="name" 
-                            value="{{ $language->name }}" class="form-control @error('name') is-invalid @enderror">
+                        <input type="hidden" name="id" value="{{ $category->id }}">
 
-                            @error('name')
+                        <div class="form-group">
+                            <div class="text-center">
+                                <label class="form-label"> Current Image </label>
+                                <br>
+                                <img style="height: 500px ;width: 500px" src="{{ $category->photo }}" alt="Photo">
+
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <label class="form-label"> Main Category Image </label>
+                            <br>
+                            <input type="file" name="photo" class="form-control @error('photo') is-invalid @enderror">
+                            @error('photo')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>
+                                        {{ $message }}
+                                    </strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <br>
+
+
+
+                        <div class="mb-3">
+                            <label class="form-label"> Main Category Nmae</label>
+                            <input type="text" value="{{ $category->name }}"
+                            name="category[0][name]"
+                                class="form-control @error("category.0.name") is-invalid @enderror">
+
+                            @error("category.0.name")
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -26,51 +55,37 @@
 
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">ABBR</label>
-                            <input type="text" name="abbr" 
-                            value="{{ $language->abbr }}" class="form-control @error('abbr') is-invalid @enderror">
-                            @error('abbr')
+                        <div class="mb-3" hidden>
+                            <label class="form-label"> Abbreviation</label>
+                            <input type="text" value="{{ $category->translation_lang }}"
+                             name="category[0][abbr]" value=""
+                                class="form-control @error("category.0.abbr") is-invalid @enderror">
+                            @error("category.0.abbr")
                                 <span class="invalid-feedback" role="alert">
                                     <strong> {{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Local</label>
-                            <input type="text" name="local" 
-                            value="{{ $language->local }} " class="form-control @error('local') is-invalid @enderror">
-                            
-                            @error('local')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong> {{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label class="form-label">Direction Of Language</label>
-                            <div>
-                                <input type="radio" name="direction"  @if ($language->direction=='Lift To right') checked @endif value="ltr">
-                                <label for="html">Lift To Right</label><br>
-                                <input type="radio" name="direction"  @if ($language->direction=='Right To Lift') checked @endif value="rtl">
-                                <label for="css">Right To Lift</label><br>
 
-                            </div>
-                        </div>
                         <div class="mb-3">
-                            <label class="form-label">Active Language ?</label>
+                            <label class="form-label">Active Main Category ?</label>
                             <div>
-                                <input type="radio" name="active" @if ($language->active=='active') checked @endif value=1>
+                                <input type="radio" name="active" value=1 @if($category->active==1) checked @endif class="@error('active') is-invalid @enderror">
                                 <label for="html">Active Now</label><br>
-                                <input type="radio" name="active" @if ($language->active=='not active') checked @endif value=0>
+                                <input type="radio" name="active"  value=0 @if($category->active==0) checked @endif class="@error('active') is-invalid @enderror">
                                 <label for="css">Active Later</label><br>
-
+                                @error('active')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>
+                                            {{ $message }}
+                                        </strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-warning">Update</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </form>
                 </div>
             </div>

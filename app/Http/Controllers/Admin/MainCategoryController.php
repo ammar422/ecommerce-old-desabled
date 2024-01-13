@@ -16,7 +16,7 @@ class MainCategoryController extends Controller
     public function index()
     {
         $defualtLang = get_default_language();
-        $categories = MainCategorie::where('translation_lang', $defualtLang)->selection()->get();
+        $categories = MainCategorie::where('translation_lang', $defualtLang)->selection();
         return view('admin.mainCategories.allMainCategories', compact('categories'));
     }
 
@@ -76,12 +76,11 @@ class MainCategoryController extends Controller
                 MainCategorie::insert($categories_Array);
             }
             DB::commit();
-            return redirect()->route('addNewCategories')->with(['success'=>'New Category saved successfuly']);
+            return redirect()->route('addNewCategories')->with(['success' => 'New Category saved successfuly']);
         } catch (\Exception $e) {
             //Exception $e;
             DB::rollBack();
-            return redirect()->route('addNewCategories')->with(['error'=>'CAN\'T saved try agien']);
-
+            return redirect()->route('addNewCategories')->with(['error' => 'CAN\'T saved try agien']);
         }
     }
 
@@ -96,17 +95,31 @@ class MainCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $categoryId)
     {
-        //
+        $category = MainCategorie::selection()->find($categoryId);
+        if (!$category) {
+            return redirect()->route('ShowAllCategories')->with(['error' => 'this Category is not found ']);
+        }
+        return view('admin.mainCategories.editCategory', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(MainCategoriesRequest $request, string $id)
     {
-        //
+        $category = MainCategorie::find($id);
+        if (!$category) {
+            return redirect()->route('ShowAllCategories')->with(['error' => 'this Category is not found ']);
+        }
+
+        $mainCatg = array_values($request->category)[0];
+        MainCategorie::where('id', $id)
+            ->update([
+                'name' => $mainCatg['name'],
+            ]);
+        return redirect()->route('ShowAllCategories')->with(['success' => ' Category updated successfuly']);
     }
 
     /**

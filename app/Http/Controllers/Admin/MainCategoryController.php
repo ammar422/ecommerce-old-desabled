@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MainCategoriesRequest;
 use App\Models\MainCategorie;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class MainCategoryController extends Controller
@@ -15,9 +14,15 @@ class MainCategoryController extends Controller
      */
     public function index()
     {
-        $defualtLang = get_default_language();
-        $categories = MainCategorie::where('translation_lang', $defualtLang)->selection();
-        return view('admin.mainCategories.allMainCategories', compact('categories'));
+        try {
+            //code...
+
+            $defualtLang = get_default_language();
+            $categories = MainCategorie::where('translation_lang', $defualtLang)->selection();
+            return view('admin.mainCategories.allMainCategories', compact('categories'));
+        } catch (\Exception $ex) {
+            return $ex->getMessage();
+        }
     }
 
     /**
@@ -25,7 +30,10 @@ class MainCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.mainCategories.addMainCategory');
+        try {
+            return view('admin.mainCategories.addMainCategory');
+        } catch (\Exception $ex) {
+        }
     }
 
     /**
@@ -97,11 +105,15 @@ class MainCategoryController extends Controller
      */
     public function edit(string $categoryId)
     {
-        $category = MainCategorie::selection()->find($categoryId);
-        if (!$category) {
-            return redirect()->route('ShowAllCategories')->with(['error' => 'this Category is not found ']);
+        try {
+            $category = MainCategorie::selection()->find($categoryId);
+            if (!$category) {
+                return redirect()->route('ShowAllCategories')->with(['error' => 'this Category is not found ']);
+            }
+            return view('admin.mainCategories.editCategory', compact('category'));
+        } catch (\Exception $ex) {
+            return $ex->getMessage();
         }
-        return view('admin.mainCategories.editCategory', compact('category'));
     }
 
     /**
@@ -109,17 +121,31 @@ class MainCategoryController extends Controller
      */
     public function update(MainCategoriesRequest $request, string $id)
     {
-        $category = MainCategorie::find($id);
-        if (!$category) {
-            return redirect()->route('ShowAllCategories')->with(['error' => 'this Category is not found ']);
-        }
+        try {
 
-        $mainCatg = array_values($request->category)[0];
-        MainCategorie::where('id', $id)
-            ->update([
-                'name' => $mainCatg['name'],
-            ]);
-        return redirect()->route('ShowAllCategories')->with(['success' => ' Category updated successfuly']);
+            $category = MainCategorie::find($id);
+
+            if (!$category) {
+                return redirect()->route('ShowAllCategories')->with(['error' => 'this Category is not found ']);
+            }
+
+            if ($request->has('photo')) {
+                $imagePath = uploadImage('mainCategories', $request->photo);
+                MainCategorie::where('id', $id)->update([
+                    'photo' => $imagePath
+                ]);
+            }
+            $mainCatg = array_values($request->category)[0];
+            MainCategorie::where('id', $id)
+                ->update([
+                    'name' => $mainCatg['name'],
+                    'active' => $request->active,
+                   
+                ]);
+            return redirect()->route('ShowAllCategories')->with(['success' => ' Category updated successfuly']);
+        } catch (\Exception $ex) {
+            return $ex->getMessage();
+        }
     }
 
     /**

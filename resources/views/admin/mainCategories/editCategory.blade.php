@@ -4,7 +4,7 @@
     @include('includes.sidebars.adminSidebar')
     @include('includes.navbars.adminNavbar')
     <!-- Form Start -->
-    {{ $category }}
+    {{-- {{ $category }} --}}
     <div class="container-fluid pt-5 px-5">
         <div class="row g-4">
             <div class="col-sm-20 col-xl-50">
